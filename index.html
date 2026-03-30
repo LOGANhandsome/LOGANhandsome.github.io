@@ -2,7 +2,10 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>잘생긴 김규민을 소개합니다</title>
     <link rel="icon" type="image/webp" href="./kim.webp" />
 
@@ -21,13 +24,22 @@
         box-sizing: border-box;
       }
 
+      :root {
+        --bg: #000;
+        --text: #fff;
+        --muted: rgba(255, 255, 255, 0.72);
+        --line: rgba(255, 255, 255, 0.08);
+        --line-soft: rgba(255, 255, 255, 0.04);
+        --glass: rgba(255, 255, 255, 0.02);
+        --glass-soft: rgba(255, 255, 255, 0.01);
+      }
+
       html,
       body {
         margin: 0;
         padding: 0;
         width: 100%;
-        height: 100%;
-        overflow: hidden;
+        min-height: 100%;
         background: #000;
         color: #fff;
         font-family: "Pretendard", "Malgun Gothic", sans-serif;
@@ -35,29 +47,31 @@
 
       body {
         position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.05),
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 80% 30%,
+            rgba(255, 255, 255, 0.035),
+            transparent 16%
+          ),
+          radial-gradient(
+            circle at 50% 80%,
+            rgba(255, 255, 255, 0.025),
+            transparent 20%
+          ),
+          linear-gradient(135deg, #000000 0%, #0d0d0d 45%, #000000 100%);
       }
 
       #bg {
         position: fixed;
         inset: 0;
         z-index: 0;
-        background:
-          radial-gradient(
-            circle at 20% 20%,
-            rgba(255, 255, 255, 0.06),
-            transparent 22%
-          ),
-          radial-gradient(
-            circle at 80% 30%,
-            rgba(255, 255, 255, 0.04),
-            transparent 18%
-          ),
-          radial-gradient(
-            circle at 50% 80%,
-            rgba(255, 255, 255, 0.03),
-            transparent 24%
-          ),
-          linear-gradient(135deg, #000000 0%, #0f0f0f 45%, #000000 100%);
       }
 
       canvas {
@@ -69,15 +83,15 @@
         inset: 0;
         pointer-events: none;
         z-index: 2;
-        opacity: 0.06;
+        opacity: 0.05;
         background-image:
-          linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+          linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
         background-size: 34px 34px;
         mix-blend-mode: screen;
         mask-image: radial-gradient(
           circle at center,
-          black 30%,
+          black 28%,
           transparent 95%
         );
       }
@@ -96,16 +110,16 @@
         left: -20%;
         top: -30%;
         width: 140%;
-        height: 26%;
+        height: 24%;
         background: linear-gradient(
           180deg,
           transparent,
-          rgba(255, 255, 255, 0.08),
-          rgba(255, 255, 255, 0.16),
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.14),
           transparent
         );
         filter: blur(18px);
-        animation: sweep 5s linear infinite;
+        animation: sweep 6s linear infinite;
       }
 
       @keyframes sweep {
@@ -113,11 +127,11 @@
           transform: translateY(-30vh) skewY(-6deg);
           opacity: 0;
         }
-        15% {
+        12% {
           opacity: 1;
         }
         50% {
-          opacity: 0.8;
+          opacity: 0.75;
         }
         100% {
           transform: translateY(140vh) skewY(-6deg);
@@ -126,76 +140,158 @@
       }
 
       .ui {
-        position: fixed;
-        inset: 0;
+        position: relative;
         z-index: 4;
+        min-height: 100dvh;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 24px;
-        pointer-events: none;
+        padding: 18px;
       }
 
       .frame {
-        width: min(1180px, 100%);
-        height: min(90vh, 900px);
         position: relative;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 32px;
+        width: min(1180px, 100%);
+        min-height: calc(100dvh - 36px);
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
         background: linear-gradient(
           145deg,
-          rgba(255, 255, 255, 0.05),
-          rgba(255, 255, 255, 0.015)
+          rgba(255, 255, 255, 0.015),
+          rgba(255, 255, 255, 0.005)
         );
         box-shadow:
-          0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-          0 30px 80px rgba(0, 0, 0, 0.6),
-          0 0 120px rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
+          inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+          0 0 60px rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(1px);
         overflow: hidden;
       }
 
-      .frame::before,
+      .frame::before {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.025);
+        pointer-events: none;
+      }
+
       .frame::after {
         content: "";
         position: absolute;
-        inset: 18px;
-        border-radius: 24px;
-        pointer-events: none;
-      }
-
-      .frame::before {
-        border: 1px solid rgba(255, 255, 255, 0.06);
-      }
-
-      .frame::after {
-        inset: auto;
-        width: 180px;
-        height: 180px;
-        right: -40px;
-        top: -40px;
+        width: 220px;
+        height: 220px;
+        right: -60px;
+        top: -60px;
         border-radius: 50%;
         background: radial-gradient(
           circle,
-          rgba(255, 255, 255, 0.14),
-          transparent 70%
+          rgba(255, 255, 255, 0.08),
+          transparent 72%
         );
-        filter: blur(10px);
-      }
-
-      .hud {
-        position: absolute;
-        inset: 0;
-        padding: 34px;
-        display: grid;
-        grid-template-columns: 1.25fr 0.95fr;
-        gap: 24px;
+        filter: blur(18px);
         pointer-events: none;
       }
 
+      .center-orb {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .center-orb::before,
+      .center-orb::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(16px);
+      }
+
+      .center-orb::before {
+        width: 300px;
+        height: 300px;
+        left: 40%;
+        top: 18%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.09),
+          transparent 72%
+        );
+        animation: orbPulse 3.8s ease-in-out infinite;
+      }
+
+      .center-orb::after {
+        width: 180px;
+        height: 180px;
+        left: 57%;
+        top: 48%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.07),
+          transparent 72%
+        );
+        animation: orbPulse 2.5s ease-in-out infinite reverse;
+      }
+
+      @keyframes orbPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.45;
+        }
+        50% {
+          transform: scale(1.16);
+          opacity: 0.92;
+        }
+      }
+
+      .flash-word {
+        position: absolute;
+        right: 34px;
+        top: 28px;
+        font-size: clamp(18px, 3vw, 30px);
+        font-weight: 900;
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.15);
+        text-transform: uppercase;
+        animation: flickerWord 1.2s infinite alternate;
+        pointer-events: none;
+      }
+
+      @keyframes flickerWord {
+        0% {
+          opacity: 0.12;
+          transform: translateX(0);
+        }
+        50% {
+          opacity: 0.28;
+          transform: translateX(4px);
+        }
+        100% {
+          opacity: 0.15;
+          transform: translateX(-4px);
+        }
+      }
+
+      .content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100dvh - 36px);
+        padding: 34px;
+        gap: 28px;
+      }
+
+      .top-area {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1.25fr 0.95fr;
+        gap: 24px;
+        align-items: center;
+      }
+
       .left {
-        align-self: center;
-        max-width: 680px;
+        max-width: 700px;
       }
 
       .eyebrow {
@@ -204,14 +300,14 @@
         gap: 10px;
         padding: 10px 16px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.22em;
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.82);
-        animation: pulseBorder 2.2s infinite ease-in-out;
+        animation: pulseBorder 2.4s infinite ease-in-out;
       }
 
       @keyframes pulseBorder {
@@ -221,54 +317,48 @@
           transform: translateY(0);
         }
         50% {
-          box-shadow: 0 0 28px rgba(255, 255, 255, 0.08);
+          box-shadow: 0 0 24px rgba(255, 255, 255, 0.06);
           transform: translateY(-1px);
         }
       }
 
       .title-wrap {
-        margin-top: 20px;
-        position: relative;
-        min-height: 185px;
+        margin-top: 18px;
       }
 
       .title {
         margin: 0;
-        font-size: clamp(52px, 9vw, 112px);
+        font-size: clamp(48px, 9vw, 112px);
         line-height: 0.92;
         letter-spacing: -0.06em;
         font-weight: 900;
         color: #fff;
         text-shadow:
-          0 0 12px rgba(255, 255, 255, 0.12),
-          0 0 26px rgba(255, 255, 255, 0.08);
+          0 0 12px rgba(255, 255, 255, 0.1),
+          0 0 22px rgba(255, 255, 255, 0.06);
       }
 
       .title.kr {
-        position: relative;
         animation: titleKick 1.8s ease-in-out infinite alternate;
       }
 
       .title.en {
         margin-top: 6px;
         color: transparent;
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.9);
-        opacity: 0.9;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.88);
+        opacity: 0.92;
         animation: outlineShift 2.8s linear infinite;
       }
 
       @keyframes titleKick {
         0% {
           transform: translateX(0) scale(1);
-          filter: blur(0);
         }
         50% {
           transform: translateX(3px) scale(1.01);
-          filter: blur(0);
         }
         100% {
           transform: translateX(-3px) scale(1.015);
-          filter: blur(0.2px);
         }
       }
 
@@ -292,7 +382,7 @@
         font-size: 18px;
         line-height: 1.9;
         color: rgba(255, 255, 255, 0.78);
-        max-width: 620px;
+        max-width: 640px;
       }
 
       .desc b {
@@ -301,15 +391,14 @@
 
       .right {
         display: flex;
-        align-items: end;
         justify-content: end;
+        align-items: center;
       }
 
       .info-stack {
-        width: min(100%, 360px);
+        width: min(100%, 370px);
         display: grid;
         gap: 14px;
-        align-self: center;
       }
 
       .info-card {
@@ -318,13 +407,13 @@
         border-radius: 22px;
         background: linear-gradient(
           145deg,
-          rgba(255, 255, 255, 0.075),
-          rgba(255, 255, 255, 0.02)
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.016)
         );
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.09);
         box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.07),
-          0 12px 40px rgba(0, 0, 0, 0.4);
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          0 12px 32px rgba(0, 0, 0, 0.24);
         overflow: hidden;
         animation: floatCard 3.6s ease-in-out infinite;
       }
@@ -358,7 +447,7 @@
         background: linear-gradient(
           120deg,
           transparent 10%,
-          rgba(255, 255, 255, 0.06) 45%,
+          rgba(255, 255, 255, 0.05) 45%,
           transparent 70%
         );
         transform: translateX(-120%);
@@ -396,28 +485,26 @@
       }
 
       .bottom-bar {
-        position: absolute;
-        left: 34px;
-        right: 34px;
-        bottom: 28px;
+        position: relative;
         display: flex;
         justify-content: space-between;
-        gap: 20px;
         align-items: center;
+        gap: 18px;
         flex-wrap: wrap;
+        padding-top: 6px;
       }
 
       .ticker {
         display: flex;
-        gap: 12px;
         flex-wrap: wrap;
+        gap: 12px;
       }
 
       .chip {
         padding: 10px 14px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         color: rgba(255, 255, 255, 0.86);
         font-size: 13px;
         font-weight: 700;
@@ -445,110 +532,38 @@
         }
         50% {
           transform: scale(1.04);
-          box-shadow: 0 0 18px rgba(255, 255, 255, 0.08);
+          box-shadow: 0 0 16px rgba(255, 255, 255, 0.06);
         }
       }
 
       .status {
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(255, 255, 255, 0.58);
         font-size: 12px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
       }
 
-      .flash-word {
-        position: absolute;
-        right: 34px;
-        top: 30px;
-        font-size: clamp(18px, 3vw, 30px);
-        font-weight: 900;
-        letter-spacing: 0.2em;
-        color: rgba(255, 255, 255, 0.16);
-        text-transform: uppercase;
-        animation: flickerWord 1.2s infinite alternate;
-      }
-
-      @keyframes flickerWord {
-        0% {
-          opacity: 0.12;
-          transform: translateX(0);
-        }
-        50% {
-          opacity: 0.3;
-          transform: translateX(4px);
-        }
-        100% {
-          opacity: 0.16;
-          transform: translateX(-4px);
-        }
-      }
-
-      .center-orb {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      .center-orb::before,
-      .center-orb::after {
-        content: "";
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(14px);
-      }
-
-      .center-orb::before {
-        width: 260px;
-        height: 260px;
-        left: 42%;
-        top: 22%;
-        background: radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.1),
-          transparent 72%
-        );
-        animation: orbPulse 3.4s ease-in-out infinite;
-      }
-
-      .center-orb::after {
-        width: 160px;
-        height: 160px;
-        left: 58%;
-        top: 48%;
-        background: radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.08),
-          transparent 72%
-        );
-        animation: orbPulse 2.2s ease-in-out infinite reverse;
-      }
-
-      @keyframes orbPulse {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.5;
-        }
-        50% {
-          transform: scale(1.15);
-          opacity: 0.95;
-        }
-      }
-
       @media (max-width: 980px) {
+        .ui {
+          padding: 12px;
+          align-items: stretch;
+        }
+
         .frame {
-          height: auto;
-          min-height: 88vh;
+          width: 100%;
+          min-height: calc(100dvh - 24px);
+          border-radius: 24px;
         }
 
-        .hud {
+        .content {
+          min-height: calc(100dvh - 24px);
+          padding: 24px 18px;
+          gap: 22px;
+        }
+
+        .top-area {
           grid-template-columns: 1fr;
-          align-content: start;
-          padding: 26px 20px 120px;
-        }
-
-        .left {
-          max-width: 100%;
+          align-items: start;
         }
 
         .right {
@@ -560,19 +575,9 @@
           max-width: 100%;
         }
 
-        .bottom-bar {
-          left: 20px;
-          right: 20px;
-          bottom: 20px;
-        }
-
         .flash-word {
           right: 20px;
-          top: 20px;
-        }
-
-        .title-wrap {
-          min-height: auto;
+          top: 18px;
         }
 
         .desc {
@@ -585,18 +590,10 @@
       }
 
       @media (max-width: 640px) {
-        .frame {
-          border-radius: 24px;
-        }
-
         .eyebrow {
           font-size: 11px;
           padding: 8px 12px;
           letter-spacing: 0.16em;
-        }
-
-        .desc {
-          line-height: 1.8;
         }
 
         .small {
@@ -607,50 +604,50 @@
           font-size: 12px;
           padding: 8px 12px;
         }
-      }
-      .ui {
-        padding: 10px;
-      }
 
-      .frame {
-        min-height: 100dvh;
-        height: 100dvh;
-        border-radius: 0;
-        background: linear-gradient(
-          145deg,
-          rgba(255, 255, 255, 0.025),
-          rgba(255, 255, 255, 0.008)
-        );
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(4px);
-        box-shadow:
-          inset 0 0 0 1px rgba(255, 255, 255, 0.025),
-          0 0 40px rgba(255, 255, 255, 0.03);
+        .status {
+          width: 100%;
+        }
       }
 
-      .frame::before {
-        border: 1px solid rgba(255, 255, 255, 0.03);
-      }
-      .frame {
-        min-height: 100dvh;
-        height: 100dvh;
-        border-radius: 0;
+      @media (max-height: 760px) {
+        .ui {
+          align-items: flex-start;
+        }
 
-        /* 핵심: 거의 투명 */
-        background: rgba(0, 0, 0, 0.08);
+        .frame {
+          min-height: auto;
+        }
 
-        /* 테두리 아주 약하게 */
-        border: 1px solid rgba(255, 255, 255, 0.03);
+        .content {
+          min-height: auto;
+        }
 
-        /* blur 약하게 */
-        backdrop-filter: blur(1px);
+        .title {
+          line-height: 0.97;
+        }
 
-        /* 그림자 최소화 */
-        box-shadow: none;
-      }
+        .desc {
+          font-size: 15px;
+          line-height: 1.7;
+        }
 
-      .frame::before {
-        border: none;
+        .value {
+          font-size: 22px;
+        }
+
+        .small {
+          font-size: 14px;
+          line-height: 1.55;
+        }
+
+        .info-card {
+          padding: 15px 16px 15px 18px;
+        }
+
+        .bottom-bar {
+          padding-bottom: 2px;
+        }
       }
     </style>
   </head>
@@ -664,62 +661,65 @@
         <div class="center-orb"></div>
         <div class="flash-word" id="flashWord">future</div>
 
-        <div class="hud">
-          <div class="left">
-            <div class="eyebrow">PROFILE SYSTEM / KIM GYUMIN</div>
+        <div class="content">
+          <div class="top-area">
+            <div class="left">
+              <div class="eyebrow">PROFILE SYSTEM / KIM GYUMIN</div>
 
-            <div class="title-wrap">
-              <h1 class="title kr">김규민</h1>
-              <h2 class="title en">GYUMIN KIM</h2>
+              <div class="title-wrap">
+                <h1 class="title kr">김규민</h1>
+                <h2 class="title en">GYUMIN KIM</h2>
+              </div>
+
+              <div class="desc">
+                <b>1-6 반장</b>이고 <b>번호는 3번</b>.<br />
+                좋아하는 건 <b>라면</b>, 그리고 취미는 <b>볼링</b>.<br /><br />
+                초등학교 때는 <b>반장을 5번</b> 했고,
+                <b>전교부회장</b>도 맡았던 사람.<br />
+                리더십이 자연스럽고, 분위기를 딱딱하게 만들기보다
+                <b>화목한 흐름</b>으로 이끄는 타입.
+              </div>
             </div>
 
-            <div class="desc">
-              <b>1-6 반장</b>이고 <b>번호는 3번</b>.<br />
-              좋아하는 건 <b>라면</b>, 그리고 취미는 <b>볼링</b>.<br /><br />
+            <div class="right">
+              <div class="info-stack">
+                <div class="info-card">
+                  <div class="label">Class Leader</div>
+                  <div class="value">1-6 반장</div>
+                </div>
 
-              초등학교 때는 <b>반장을 5번</b> 했고, <b>전교부회장</b>도 맡았던
-              사람.<br />
-              리더십이 자연스럽고, 분위기를 딱딱하게 만들기보다
-              <b>화목한 흐름</b>으로 이끄는 타입.
-            </div>
-          </div>
+                <div class="info-card">
+                  <div class="label">Number</div>
+                  <div class="value">3번</div>
+                </div>
 
-          <div class="right">
-            <div class="info-stack">
-              <div class="info-card">
-                <div class="label">Class Leader</div>
-                <div class="value">1-6 반장</div>
-              </div>
+                <div class="info-card">
+                  <div class="label">Favorite / Hobby</div>
+                  <div class="small">라면 좋아함 · 볼링 좋아함</div>
+                </div>
 
-              <div class="info-card">
-                <div class="label">Number</div>
-                <div class="value">3번</div>
-              </div>
-
-              <div class="info-card">
-                <div class="label">Favorite / Hobby</div>
-                <div class="small">라면 좋아함 · 볼링 좋아함</div>
-              </div>
-
-              <div class="info-card">
-                <div class="label">History</div>
-                <div class="small">
-                  초등학교 반장 5회<br />
-                  전교부회장 경험
+                <div class="info-card">
+                  <div class="label">History</div>
+                  <div class="small">
+                    초등학교 반장 5회<br />
+                    전교부회장 경험
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="bottom-bar">
-          <div class="ticker">
-            <div class="chip">LEADERSHIP</div>
-            <div class="chip">BOWLING</div>
-            <div class="chip">RAMEN</div>
-            <div class="chip">HARMONY</div>
+          <div class="bottom-bar">
+            <div class="ticker">
+              <div class="chip">LEADERSHIP</div>
+              <div class="chip">BOWLING</div>
+              <div class="chip">RAMEN</div>
+              <div class="chip">HARMONY</div>
+            </div>
+            <div class="status" id="statusText">
+              FUTURISTIC / MONOCHROME / LIVE VISUAL
+            </div>
           </div>
-          <div class="status">FUTURISTIC / MONOCHROME / LIVE VISUAL</div>
         </div>
       </div>
     </div>
@@ -728,9 +728,11 @@
       import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js";
 
       const container = document.getElementById("bg");
+      const flashWord = document.getElementById("flashWord");
+      const statusText = document.getElementById("statusText");
 
       const scene = new THREE.Scene();
-      scene.fog = new THREE.Fog(0x000000, 8, 28);
+      scene.fog = new THREE.Fog(0x000000, 12, 42);
 
       const camera = new THREE.PerspectiveCamera(
         55,
@@ -738,7 +740,7 @@
         0.1,
         100,
       );
-      camera.position.set(0, 0.8, 10);
+      camera.position.set(0, 0.8, 11);
 
       const renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -748,129 +750,397 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       container.appendChild(renderer.domElement);
 
-      // 그룹
       const world = new THREE.Group();
       scene.add(world);
 
-      // 조명
-      const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+      const ambient = new THREE.AmbientLight(0xffffff, 0.9);
       scene.add(ambient);
 
-      const dir1 = new THREE.DirectionalLight(0xffffff, 1.1);
-      dir1.position.set(5, 8, 6);
+      const dir1 = new THREE.DirectionalLight(0xffffff, 1.25);
+      dir1.position.set(6, 8, 8);
       scene.add(dir1);
 
-      const dir2 = new THREE.DirectionalLight(0xffffff, 0.45);
-      dir2.position.set(-6, -3, 4);
+      const dir2 = new THREE.DirectionalLight(0xffffff, 0.5);
+      dir2.position.set(-8, -2, 5);
       scene.add(dir2);
 
-      const point = new THREE.PointLight(0xffffff, 2.4, 30, 2);
-      point.position.set(0, 2, 4);
+      const point = new THREE.PointLight(0xffffff, 2.8, 40, 2);
+      point.position.set(0, 2, 5);
       scene.add(point);
 
-      // 메인 토러스 매듭
-      const knotGeo = new THREE.TorusKnotGeometry(1.35, 0.24, 240, 20, 2, 5);
-      const knotMat = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
-        metalness: 1,
-        roughness: 0.16,
-        transmission: 0.02,
-        clearcoat: 1,
-        clearcoatRoughness: 0.15,
-        emissive: 0xffffff,
-        emissiveIntensity: 0.06,
-      });
-      const knot = new THREE.Mesh(knotGeo, knotMat);
-      knot.position.set(0, 0.5, 0);
-      world.add(knot);
+      const accent1 = new THREE.PointLight(0xffffff, 1.2, 30, 2);
+      accent1.position.set(4, -1, 2);
+      scene.add(accent1);
 
-      // 와이어 구체
-      const sphereGeo = new THREE.SphereGeometry(2.6, 32, 32);
-      const sphereWire = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.12,
-      });
-      const sphere = new THREE.Mesh(sphereGeo, sphereWire);
-      sphere.position.set(0, 0.5, 0);
-      world.add(sphere);
+      const accent2 = new THREE.PointLight(0xffffff, 0.9, 30, 2);
+      accent2.position.set(-4, 1, -1);
+      scene.add(accent2);
 
-      // 링들
+      const heroes = new THREE.Group();
       const rings = new THREE.Group();
+      const orbiters = new THREE.Group();
+      const shards = new THREE.Group();
+
+      world.add(heroes);
       world.add(rings);
+      world.add(orbiters);
+      world.add(shards);
 
-      for (let i = 0; i < 5; i++) {
+      const heroObjects = [];
+      const ringObjects = [];
+      const orbiterObjects = [];
+      const shardObjects = [];
+
+      const rand = (min, max) => Math.random() * (max - min) + min;
+      const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+      function clearGroup(group, store) {
+        while (group.children.length) {
+          const child = group.children.pop();
+          if (child.geometry) child.geometry.dispose();
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach((m) => m.dispose());
+            } else {
+              child.material.dispose();
+            }
+          }
+        }
+        store.length = 0;
+      }
+
+      function createGlowBall(size, opacity = 0.08) {
+        const geo = new THREE.SphereGeometry(size, 24, 24);
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity,
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        return mesh;
+      }
+
+      function addHeroKnot() {
+        const geo = new THREE.TorusKnotGeometry(
+          rand(1.1, 1.5),
+          rand(0.18, 0.28),
+          260,
+          24,
+          pick([2, 3, 4]),
+          pick([5, 6, 7]),
+        );
+        const mat = new THREE.MeshPhysicalMaterial({
+          color: 0xffffff,
+          metalness: 1,
+          roughness: 0.14,
+          clearcoat: 1,
+          clearcoatRoughness: 0.12,
+          emissive: 0xffffff,
+          emissiveIntensity: 0.06,
+          transmission: 0.02,
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(rand(-0.5, 0.5), rand(-0.15, 0.8), rand(-0.2, 0.2));
+        mesh.rotation.set(rand(0, Math.PI), rand(0, Math.PI), rand(0, Math.PI));
+        heroes.add(mesh);
+        heroObjects.push({
+          mesh,
+          type: "knot",
+          spinX: rand(0.004, 0.013),
+          spinY: rand(0.006, 0.016),
+          spinZ: rand(0.003, 0.009),
+          bob: rand(0.03, 0.07),
+        });
+      }
+
+      function addHeroWireSphere() {
+        const geo = new THREE.SphereGeometry(rand(1.8, 2.8), 32, 32);
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          wireframe: true,
+          transparent: true,
+          opacity: rand(0.16, 0.28),
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(rand(-0.3, 0.3), rand(-0.1, 0.9), rand(-0.2, 0.2));
+        heroes.add(mesh);
+        heroObjects.push({
+          mesh,
+          type: "wireSphere",
+          spinX: rand(0.001, 0.004),
+          spinY: rand(0.001, 0.004),
+          spinZ: rand(0.0005, 0.003),
+          bob: rand(0.01, 0.04),
+        });
+      }
+
+      function addHeroIcosa() {
+        const geo = new THREE.IcosahedronGeometry(rand(1.2, 1.9), 1);
+        const mat = new THREE.MeshPhysicalMaterial({
+          color: 0xffffff,
+          metalness: 1,
+          roughness: 0.22,
+          clearcoat: 1,
+          clearcoatRoughness: 0.18,
+          emissive: 0xffffff,
+          emissiveIntensity: 0.03,
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(rand(-0.4, 0.4), rand(-0.1, 0.9), rand(-0.2, 0.2));
+        heroes.add(mesh);
+        heroObjects.push({
+          mesh,
+          type: "icosa",
+          spinX: rand(0.004, 0.01),
+          spinY: rand(0.006, 0.014),
+          spinZ: rand(0.002, 0.008),
+          bob: rand(0.02, 0.05),
+        });
+      }
+
+      function addHeroOcta() {
+        const geo = new THREE.OctahedronGeometry(rand(1.2, 2), 0);
+        const mat = new THREE.MeshPhysicalMaterial({
+          color: 0xffffff,
+          metalness: 1,
+          roughness: 0.18,
+          clearcoat: 1,
+          clearcoatRoughness: 0.14,
+          emissive: 0xffffff,
+          emissiveIntensity: 0.04,
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(rand(-0.45, 0.45), rand(-0.05, 0.85), rand(-0.2, 0.2));
+        heroes.add(mesh);
+        heroObjects.push({
+          mesh,
+          type: "octa",
+          spinX: rand(0.006, 0.014),
+          spinY: rand(0.006, 0.016),
+          spinZ: rand(0.004, 0.012),
+          bob: rand(0.02, 0.06),
+        });
+      }
+
+      function addHeroTorus() {
         const geo = new THREE.TorusGeometry(
-          2.3 + i * 0.34,
-          0.02 + i * 0.004,
-          16,
-          120,
+          rand(1.4, 2.2),
+          rand(0.08, 0.18),
+          24,
+          160,
         );
-        const mat = new THREE.MeshBasicMaterial({
+        const mat = new THREE.MeshPhysicalMaterial({
           color: 0xffffff,
-          transparent: true,
-          opacity: 0.08 - i * 0.01,
+          metalness: 1,
+          roughness: 0.15,
+          clearcoat: 1,
+          clearcoatRoughness: 0.12,
+          emissive: 0xffffff,
+          emissiveIntensity: 0.04,
         });
-
-        const ring = new THREE.Mesh(geo, mat);
-        ring.rotation.x = Math.random() * Math.PI;
-        ring.rotation.y = Math.random() * Math.PI;
-        ring.rotation.z = Math.random() * Math.PI;
-        rings.add(ring);
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(rand(-0.35, 0.35), rand(0, 0.7), rand(-0.2, 0.2));
+        mesh.rotation.x = rand(0, Math.PI);
+        mesh.rotation.y = rand(0, Math.PI);
+        heroes.add(mesh);
+        heroObjects.push({
+          mesh,
+          type: "torus",
+          spinX: rand(0.003, 0.009),
+          spinY: rand(0.004, 0.011),
+          spinZ: rand(0.002, 0.007),
+          bob: rand(0.01, 0.05),
+        });
       }
 
-      // 큐브 입자
-      const particles = new THREE.Group();
-      world.add(particles);
-
-      const cubeGeo = new THREE.BoxGeometry(0.08, 0.08, 0.08);
-
-      for (let i = 0; i < 230; i++) {
-        const mat = new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: Math.random() * 0.4 + 0.08,
-        });
-
-        const cube = new THREE.Mesh(cubeGeo, mat);
-
-        const radius = 4 + Math.random() * 8;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(2 * Math.random() - 1);
-
-        cube.position.set(
-          radius * Math.sin(phi) * Math.cos(theta),
-          radius * Math.cos(phi) * 0.7,
-          radius * Math.sin(phi) * Math.sin(theta),
-        );
-
-        cube.rotation.set(
-          Math.random() * Math.PI,
-          Math.random() * Math.PI,
-          Math.random() * Math.PI,
-        );
-
-        cube.userData = {
-          speed: 0.002 + Math.random() * 0.006,
-          radius,
-          theta,
-          phi,
-          drift: Math.random() * 100,
-        };
-
-        particles.add(cube);
+      function buildRings(count = 4) {
+        for (let i = 0; i < count; i++) {
+          const geo = new THREE.TorusGeometry(
+            2.3 + i * rand(0.28, 0.4),
+            0.018 + i * 0.004,
+            20,
+            140,
+          );
+          const mat = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: Math.max(0.05, 0.18 - i * 0.025),
+          });
+          const ring = new THREE.Mesh(geo, mat);
+          ring.rotation.x = rand(0, Math.PI);
+          ring.rotation.y = rand(0, Math.PI);
+          ring.rotation.z = rand(0, Math.PI);
+          rings.add(ring);
+          ringObjects.push({
+            mesh: ring,
+            spinX: rand(0.0004, 0.0018) + i * 0.0002,
+            spinY: rand(-0.002, -0.0004),
+            spinZ: rand(0.0003, 0.0014),
+          });
+        }
       }
 
-      // 스타필드
+      function buildOrbiters(count = 180) {
+        const boxGeo = new THREE.BoxGeometry(0.08, 0.08, 0.08);
+        for (let i = 0; i < count; i++) {
+          const mat = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: rand(0.12, 0.42),
+          });
+
+          const cube = new THREE.Mesh(boxGeo, mat);
+
+          const radius = rand(4.5, 10.5);
+          const theta = rand(0, Math.PI * 2);
+          const phi = Math.acos(2 * Math.random() - 1);
+
+          cube.position.set(
+            radius * Math.sin(phi) * Math.cos(theta),
+            radius * Math.cos(phi) * 0.75,
+            radius * Math.sin(phi) * Math.sin(theta),
+          );
+
+          cube.rotation.set(rand(0, Math.PI), rand(0, Math.PI), rand(0, Math.PI));
+
+          cube.userData = {
+            speed: rand(0.0015, 0.006),
+            radius,
+            theta,
+            phi,
+            drift: rand(0, 100),
+          };
+
+          orbiters.add(cube);
+          orbiterObjects.push(cube);
+        }
+      }
+
+      function buildShards(count = 26) {
+        for (let i = 0; i < count; i++) {
+          const geo = new THREE.OctahedronGeometry(rand(0.06, 0.2), 0);
+          const mat = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: rand(0.08, 0.24),
+            wireframe: Math.random() > 0.55,
+          });
+
+          const shard = new THREE.Mesh(geo, mat);
+          shard.position.set(rand(-7, 7), rand(-4, 4), rand(-4, 6));
+          shard.rotation.set(rand(0, Math.PI), rand(0, Math.PI), rand(0, Math.PI));
+          shards.add(shard);
+          shardObjects.push({
+            mesh: shard,
+            speedX: rand(-0.004, 0.004),
+            speedY: rand(-0.004, 0.004),
+            speedZ: rand(-0.004, 0.004),
+            drift: rand(0, 100),
+          });
+        }
+      }
+
+      const presets = [
+        {
+          name: "TORUS KNOT CORE",
+          words: ["future", "leader", "impact", "signal", "vision"],
+          build() {
+            addHeroKnot();
+            addHeroWireSphere();
+            buildRings(5);
+            buildOrbiters(210);
+            buildShards(22);
+          },
+        },
+        {
+          name: "CRYSTAL ENGINE",
+          words: ["crystal", "sharp", "energy", "focus", "pulse"],
+          build() {
+            addHeroIcosa();
+            addHeroOcta();
+            addHeroWireSphere();
+            buildRings(3);
+            buildOrbiters(170);
+            buildShards(34);
+          },
+        },
+        {
+          name: "ORBITAL HALO",
+          words: ["orbit", "halo", "motion", "system", "gravity"],
+          build() {
+            addHeroTorus();
+            addHeroWireSphere();
+            addHeroTorus();
+            buildRings(6);
+            buildOrbiters(230);
+            buildShards(20);
+          },
+        },
+        {
+          name: "DUAL CORE",
+          words: ["dual", "sync", "flow", "harmony", "balance"],
+          build() {
+            addHeroKnot();
+            addHeroIcosa();
+            addHeroWireSphere();
+            buildRings(4);
+            buildOrbiters(200);
+            buildShards(28);
+          },
+        },
+        {
+          name: "METAL STAR",
+          words: ["star", "bright", "flash", "glow", "future"],
+          build() {
+            addHeroIcosa();
+            addHeroTorus();
+            buildRings(5);
+            buildOrbiters(190);
+            buildShards(30);
+          },
+        },
+      ];
+
+      function clearSceneObjects() {
+        clearGroup(heroes, heroObjects);
+        clearGroup(rings, ringObjects);
+        clearGroup(orbiters, orbiterObjects);
+        clearGroup(shards, shardObjects);
+      }
+
+      function generatePreset() {
+        clearSceneObjects();
+
+        const preset = pick(presets);
+        preset.build();
+        statusText.textContent = `FUTURISTIC / MONOCHROME / ${preset.name}`;
+
+        let wordIndex = 0;
+        flashWord.textContent = preset.words[0];
+
+        if (window.wordTimer) clearInterval(window.wordTimer);
+        window.wordTimer = setInterval(() => {
+          wordIndex = (wordIndex + 1) % preset.words.length;
+          flashWord.style.opacity = "0";
+          flashWord.style.transform = "translateX(18px)";
+          setTimeout(() => {
+            flashWord.textContent = preset.words[wordIndex];
+            flashWord.style.opacity = "";
+            flashWord.style.transform = "";
+          }, 180);
+        }, 1400);
+      }
+
+      generatePreset();
+
       const starGeo = new THREE.BufferGeometry();
-      const starCount = 1300;
+      const starCount = 1500;
       const positions = new Float32Array(starCount * 3);
 
       for (let i = 0; i < starCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 70;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 40;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 60;
+        positions[i * 3] = (Math.random() - 0.5) * 75;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 45;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 65;
       }
 
       starGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
@@ -879,13 +1149,12 @@
         color: 0xffffff,
         size: 0.05,
         transparent: true,
-        opacity: 0.78,
+        opacity: 0.82,
       });
 
       const stars = new THREE.Points(starGeo, starMat);
       scene.add(stars);
 
-      // 마우스 인터랙션
       let mouseX = 0;
       let mouseY = 0;
       let targetX = 0;
@@ -896,31 +1165,6 @@
         mouseY = (e.clientY / window.innerHeight) * 2 - 1;
       });
 
-      // 단어 전환
-      const flashWord = document.getElementById("flashWord");
-      const words = [
-        "future",
-        "leader",
-        "harmony",
-        "energy",
-        "bowling",
-        "vision",
-        "impact",
-      ];
-      let wordIndex = 0;
-
-      setInterval(() => {
-        wordIndex = (wordIndex + 1) % words.length;
-        flashWord.style.opacity = "0";
-        flashWord.style.transform = "translateX(20px)";
-        setTimeout(() => {
-          flashWord.textContent = words[wordIndex];
-          flashWord.style.opacity = "";
-          flashWord.style.transform = "";
-        }, 180);
-      }, 1400);
-
-      // 카메라 쇼크 연출
       let burst = 0;
       setInterval(() => {
         burst = 1;
@@ -935,37 +1179,34 @@
         targetX += (mouseX - targetX) * 0.03;
         targetY += (mouseY - targetY) * 0.03;
 
-        // 전체 월드 움직임
-        world.rotation.y += 0.0025;
-        world.rotation.x = Math.sin(t * 0.45) * 0.12 + targetY * 0.22;
-        world.rotation.z = Math.cos(t * 0.22) * 0.08;
+        world.rotation.y += 0.0018;
+        world.rotation.x = Math.sin(t * 0.38) * 0.1 + targetY * 0.18;
+        world.rotation.z = Math.cos(t * 0.2) * 0.05;
+        world.position.x = Math.sin(t * 0.65) * 0.22 + targetX * 0.75;
+        world.position.y = Math.cos(t * 0.78) * 0.15 - targetY * 0.34;
 
-        world.position.x = Math.sin(t * 0.8) * 0.25 + targetX * 0.9;
-        world.position.y = Math.cos(t * 0.9) * 0.18 - targetY * 0.45;
+        heroObjects.forEach((item, i) => {
+          item.mesh.rotation.x += item.spinX;
+          item.mesh.rotation.y += item.spinY;
+          item.mesh.rotation.z += item.spinZ;
 
-        // 메인 오브젝트
-        knot.rotation.x += 0.01;
-        knot.rotation.y += 0.014;
-        knot.rotation.z += 0.006;
-        const knotScale = 1 + Math.sin(t * 2.4) * 0.05;
-        knot.scale.setScalar(knotScale);
+          const baseScale = 1 + Math.sin(t * (1.6 + i * 0.25)) * item.bob;
+          item.mesh.scale.setScalar(baseScale);
 
-        sphere.rotation.y -= 0.002;
-        sphere.rotation.x += 0.0016;
-        sphere.scale.setScalar(1 + Math.sin(t * 1.3) * 0.02);
-
-        rings.children.forEach((ring, i) => {
-          ring.rotation.x += 0.0012 + i * 0.0005;
-          ring.rotation.y -= 0.0015 + i * 0.00035;
-          ring.rotation.z += 0.001 + i * 0.0003;
+          item.mesh.position.y += Math.sin(t * (0.8 + i * 0.18)) * 0.0018;
         });
 
-        // 파티클 궤도
-        particles.children.forEach((cube, i) => {
+        ringObjects.forEach((item) => {
+          item.mesh.rotation.x += item.spinX;
+          item.mesh.rotation.y += item.spinY;
+          item.mesh.rotation.z += item.spinZ;
+        });
+
+        orbiterObjects.forEach((cube, i) => {
           cube.userData.theta += cube.userData.speed * 0.7;
           cube.userData.drift += cube.userData.speed * 0.9;
 
-          const r = cube.userData.radius + Math.sin(t + i * 0.2) * 0.15;
+          const r = cube.userData.radius + Math.sin(t + i * 0.18) * 0.16;
 
           cube.position.x =
             r *
@@ -973,8 +1214,8 @@
             Math.cos(cube.userData.theta + Math.sin(cube.userData.drift) * 0.6);
 
           cube.position.y =
-            r * Math.cos(cube.userData.phi) * 0.7 +
-            Math.sin(cube.userData.drift * 1.6) * 0.32;
+            r * Math.cos(cube.userData.phi) * 0.75 +
+            Math.sin(cube.userData.drift * 1.5) * 0.28;
 
           cube.position.z =
             r *
@@ -985,20 +1226,28 @@
           cube.rotation.y += 0.018;
         });
 
-        // 스타필드
+        shardObjects.forEach((item, i) => {
+          item.mesh.rotation.x += item.speedX;
+          item.mesh.rotation.y += item.speedY;
+          item.mesh.rotation.z += item.speedZ;
+
+          item.mesh.position.y += Math.sin(t * 0.8 + item.drift) * 0.002;
+          item.mesh.position.x += Math.cos(t * 0.6 + i) * 0.0012;
+        });
+
         stars.rotation.y += 0.0007;
         stars.rotation.x = Math.sin(t * 0.15) * 0.04;
 
-        // 조명 변동
-        point.intensity = 2.2 + Math.sin(t * 3.8) * 0.45;
+        point.intensity = 2.4 + Math.sin(t * 3.5) * 0.5;
+        accent1.intensity = 0.9 + Math.sin(t * 2.8) * 0.28;
+        accent2.intensity = 0.75 + Math.cos(t * 2.2) * 0.24;
 
-        // 카메라 시네마틱 움직임
         burst *= 0.93;
         camera.position.x =
-          Math.sin(t * 0.32) * 0.7 + targetX * 0.55 + burst * 0.22;
-        camera.position.y = 0.75 + Math.cos(t * 0.4) * 0.26 - targetY * 0.38;
-        camera.position.z = 10 + Math.sin(t * 0.7) * 0.45 - burst * 0.35;
-        camera.lookAt(0, 0.4, 0);
+          Math.sin(t * 0.3) * 0.65 + targetX * 0.5 + burst * 0.2;
+        camera.position.y = 0.8 + Math.cos(t * 0.42) * 0.22 - targetY * 0.28;
+        camera.position.z = 11 + Math.sin(t * 0.65) * 0.35 - burst * 0.28;
+        camera.lookAt(0, 0.45, 0);
 
         renderer.render(scene, camera);
       }
