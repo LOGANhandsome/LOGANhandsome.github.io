@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>김규민 | FUTURE PROFILE</title>
-    <link rel="icon" type="image/png" href="./kim.webp" />
+    <title>잘생긴 김규민을 소개합니다</title>
+    <link rel="icon" type="image/webp" href="./kim.webp" />
 
     <!-- 검색엔진 차단 -->
     <meta
@@ -42,9 +42,21 @@
         inset: 0;
         z-index: 0;
         background:
-          radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06), transparent 22%),
-          radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.04), transparent 18%),
-          radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.03), transparent 24%),
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.06),
+            transparent 22%
+          ),
+          radial-gradient(
+            circle at 80% 30%,
+            rgba(255, 255, 255, 0.04),
+            transparent 18%
+          ),
+          radial-gradient(
+            circle at 50% 80%,
+            rgba(255, 255, 255, 0.03),
+            transparent 24%
+          ),
           linear-gradient(135deg, #000000 0%, #0f0f0f 45%, #000000 100%);
       }
 
@@ -63,7 +75,11 @@
           linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
         background-size: 34px 34px;
         mix-blend-mode: screen;
-        mask-image: radial-gradient(circle at center, black 30%, transparent 95%);
+        mask-image: radial-gradient(
+          circle at center,
+          black 30%,
+          transparent 95%
+        );
       }
 
       .scan {
@@ -159,7 +175,11 @@
         right: -40px;
         top: -40px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.14), transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.14),
+          transparent 70%
+        );
         filter: blur(10px);
       }
 
@@ -482,7 +502,11 @@
         height: 260px;
         left: 42%;
         top: 22%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.10), transparent 72%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1),
+          transparent 72%
+        );
         animation: orbPulse 3.4s ease-in-out infinite;
       }
 
@@ -491,7 +515,11 @@
         height: 160px;
         left: 58%;
         top: 48%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 72%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.08),
+          transparent 72%
+        );
         animation: orbPulse 2.2s ease-in-out infinite reverse;
       }
 
@@ -580,6 +608,29 @@
           padding: 8px 12px;
         }
       }
+      .ui {
+        padding: 10px;
+      }
+
+      .frame {
+        min-height: 100dvh;
+        height: 100dvh;
+        border-radius: 0;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.025),
+          rgba(255, 255, 255, 0.008)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(4px);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+          0 0 40px rgba(255, 255, 255, 0.03);
+      }
+
+      .frame::before {
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
     </style>
   </head>
   <body>
@@ -605,8 +656,8 @@
               <b>1-6 반장</b>이고 <b>번호는 3번</b>.<br />
               좋아하는 건 <b>라면</b>, 그리고 취미는 <b>볼링</b>.<br /><br />
 
-              초등학교 때는 <b>반장을 5번</b> 했고,
-              <b>전교부회장</b>도 맡았던 사람.<br />
+              초등학교 때는 <b>반장을 5번</b> 했고, <b>전교부회장</b>도 맡았던
+              사람.<br />
               리더십이 자연스럽고, 분위기를 딱딱하게 만들기보다
               <b>화목한 흐름</b>으로 이끄는 타입.
             </div>
@@ -664,7 +715,7 @@
         55,
         window.innerWidth / window.innerHeight,
         0.1,
-        100
+        100,
       );
       camera.position.set(0, 0.8, 10);
 
@@ -729,7 +780,12 @@
       world.add(rings);
 
       for (let i = 0; i < 5; i++) {
-        const geo = new THREE.TorusGeometry(2.3 + i * 0.34, 0.02 + i * 0.004, 16, 120);
+        const geo = new THREE.TorusGeometry(
+          2.3 + i * 0.34,
+          0.02 + i * 0.004,
+          16,
+          120,
+        );
         const mat = new THREE.MeshBasicMaterial({
           color: 0xffffff,
           transparent: true,
@@ -765,13 +821,13 @@
         cube.position.set(
           radius * Math.sin(phi) * Math.cos(theta),
           radius * Math.cos(phi) * 0.7,
-          radius * Math.sin(phi) * Math.sin(theta)
+          radius * Math.sin(phi) * Math.sin(theta),
         );
 
         cube.rotation.set(
           Math.random() * Math.PI,
           Math.random() * Math.PI,
-          Math.random() * Math.PI
+          Math.random() * Math.PI,
         );
 
         cube.userData = {
@@ -867,7 +923,7 @@
         world.position.y = Math.cos(t * 0.9) * 0.18 - targetY * 0.45;
 
         // 메인 오브젝트
-        knot.rotation.x += 0.010;
+        knot.rotation.x += 0.01;
         knot.rotation.y += 0.014;
         knot.rotation.z += 0.006;
         const knotScale = 1 + Math.sin(t * 2.4) * 0.05;
@@ -917,7 +973,8 @@
 
         // 카메라 시네마틱 움직임
         burst *= 0.93;
-        camera.position.x = Math.sin(t * 0.32) * 0.7 + targetX * 0.55 + burst * 0.22;
+        camera.position.x =
+          Math.sin(t * 0.32) * 0.7 + targetX * 0.55 + burst * 0.22;
         camera.position.y = 0.75 + Math.cos(t * 0.4) * 0.26 - targetY * 0.38;
         camera.position.z = 10 + Math.sin(t * 0.7) * 0.45 - burst * 0.35;
         camera.lookAt(0, 0.4, 0);
