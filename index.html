@@ -631,6 +631,27 @@
       .frame::before {
         border: 1px solid rgba(255, 255, 255, 0.03);
       }
+      .frame {
+        min-height: 100dvh;
+        height: 100dvh;
+        border-radius: 0;
+
+        /* 핵심: 거의 투명 */
+        background: rgba(0, 0, 0, 0.08);
+
+        /* 테두리 아주 약하게 */
+        border: 1px solid rgba(255, 255, 255, 0.03);
+
+        /* blur 약하게 */
+        backdrop-filter: blur(1px);
+
+        /* 그림자 최소화 */
+        box-shadow: none;
+      }
+
+      .frame::before {
+        border: none;
+      }
     </style>
   </head>
   <body>
